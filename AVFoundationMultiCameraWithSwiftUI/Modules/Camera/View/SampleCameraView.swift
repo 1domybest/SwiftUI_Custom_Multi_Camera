@@ -18,16 +18,20 @@ struct SampleCameraView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Spacer().frame(width: 15)
+                            Spacer().frame(width: 10)
                             
                             Button(action: {
                                 self.vm.switchScreenMode()
                             }, label: {
-                                Circle()
-                                    .frame(width: 80, height: 80)
-                                    .overlay(
-                                        Text("더블")
-                                            .foregroundColor(.white)
+                                Text("DoubleCamera")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .foregroundColor(.blue)
+                                        
                                     )
                             })
                             
@@ -35,16 +39,20 @@ struct SampleCameraView: View {
                             Button(action: {
                                 self.vm.toggleCameraPostion()
                             }, label: {
-                                Circle()
-                                    .frame(width: 80, height: 80)
-                                    .overlay(
-                                        Text("전면/후면")
-                                            .foregroundColor(.white)
+                                Text("switchPostion")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .foregroundColor(.blue)
+                                        
                                     )
                             })
-                            Spacer().frame(width: 15)
+                            Spacer().frame(width: 10)
                         }
-                        Spacer().frame(height: 15)
+                        Spacer().frame(height: 10)
                     }
                 )
                 .opacity(self.vm.cameraManager?.cameraViewMode == .singleScreen ? 1 : 0)
@@ -54,7 +62,7 @@ struct SampleCameraView: View {
                 .frame(height: (UIScreen.main.bounds.width / 9)  * 16 )
                 .overlay(
                     VStack {
-                        Spacer().frame(height: 15)
+                        Spacer().frame(height: 10)
                         
                         HStack {
                             Spacer()
@@ -64,7 +72,7 @@ struct SampleCameraView: View {
                                     self.vm.toggleMainCameraPostion()
                                 }
                             
-                            Spacer().frame(width: 15)
+                            Spacer().frame(width: 10)
                         }
                         
                         Spacer()
@@ -75,31 +83,39 @@ struct SampleCameraView: View {
                     VStack {
                         Spacer()
                         HStack {
-                            Spacer().frame(width: 15)
+                            Spacer().frame(width: 10)
                             Button(action: {
                                 self.vm.switchScreenMode()
                             }, label: {
-                                Circle()
-                                    .frame(width: 80, height: 80)
-                                    .overlay(
-                                        Text("싱글")
-                                            .foregroundColor(.white)
+                                Text("singleCamera")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .foregroundColor(.blue)
+                                        
                                     )
                             })
                             Spacer()
                             Button(action: {
                                 self.vm.toggleMainCameraPostion()
                             }, label: {
-                                Circle()
-                                    .frame(width: 80, height: 80)
-                                    .overlay(
-                                        Text("스왑")
-                                            .foregroundColor(.white)
+                                Text("switchCamera")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 15)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .foregroundColor(.blue)
+                                        
                                     )
                             })
-                            Spacer().frame(width: 15)
+                            Spacer().frame(width: 10)
                         }
-                        Spacer().frame(height: 15)
+                        Spacer().frame(height: 10)
                     }
                 )
                 .opacity(self.vm.cameraManager?.cameraViewMode == .doubleScreen ? 1 : 0)
