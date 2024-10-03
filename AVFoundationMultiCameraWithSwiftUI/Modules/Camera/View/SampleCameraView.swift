@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SampleCameraView: View {
     @ObservedObject var vm: SampleCameraViewModel = SampleCameraViewModel()
+    
     var body: some View {
         ZStack {
             UIKitViewRepresentable(view: vm.cameraManager?.singleCameraView)
@@ -55,9 +56,8 @@ struct SampleCameraView: View {
                         Spacer().frame(height: 10)
                     }
                 )
-                .opacity(self.vm.cameraManager?.cameraViewMode == .singleScreen ? 1 : 0)
                 .animation(.default)
-            
+
             UIKitViewRepresentable(view: vm.cameraManager?.mainCameraView)
                 .frame(height: (UIScreen.main.bounds.width / 9)  * 16 )
                 .overlay(
@@ -77,7 +77,6 @@ struct SampleCameraView: View {
                         
                         Spacer()
                     }
-                    
                 )
                 .overlay(
                     VStack {
@@ -120,7 +119,6 @@ struct SampleCameraView: View {
                 )
                 .opacity(self.vm.cameraManager?.cameraViewMode == .doubleScreen ? 1 : 0)
                 .animation(.default)
-            
         }
         .onDisappear {
             self.vm.unreference()

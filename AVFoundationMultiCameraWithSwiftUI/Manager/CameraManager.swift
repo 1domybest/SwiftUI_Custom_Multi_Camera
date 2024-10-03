@@ -128,6 +128,8 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         } else {
             self.setupCaptureSessions()
         }
+        
+        self.setupGestureRecognizers()
     }
     
     ///
@@ -151,6 +153,69 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         self.appendQueueCallback = nil
     }
     
+    func setupGestureRecognizers() {
+        // 단일 카메라 뷰에 핀치 제스처 추가
+        let singleCameraPinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(singleViewHandlePinchGesture(_:)))
+        singleCameraView?.addGestureRecognizer(singleCameraPinchGesture)
+
+        // 메인 카메라 뷰에 핀치 제스처 추가
+        let mainCameraPinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(multiViewHandlePinchGesture(_:)))
+        mainCameraView?.addGestureRecognizer(mainCameraPinchGesture)
+    }
+    
+    @objc func multiViewHandlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
+        guard let view = gesture.view else { return }
+        if self.mainCameraPostion == .front { return }
+        
+        if gesture.state == .changed {
+            let scale = Double(gesture.scale)
+
+            var preZoomFactor: Double = .zero
+            var zoomFactor: Double = .zero
+            
+            // 전면 또는 후면 카메라에 따라 줌 값 계산
+            if self.mainCameraPostion == .front {
+                preZoomFactor = frontCameraCurrentZoomFactor * scale
+                zoomFactor = min(max(preZoomFactor, self.frontCameraMinimumZoonFactor), self.frontCameraMaximumZoonFactor)
+            } else {
+                preZoomFactor = backCameraCurrentZoomFactor * scale
+                zoomFactor = min(max(preZoomFactor, self.backCameraMinimumZoonFactor), self.backCameraMaximumZoonFactor)
+            }
+            
+            // 줌 값 적용
+            self.setZoom(position: self.mainCameraPostion, zoomFactor: zoomFactor)
+            
+            // 스케일 값 초기화
+            gesture.scale = 1.0
+        }
+    }
+    
+    @objc func singleViewHandlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
+        guard let view = gesture.view else { return }
+        if self.isMultiCamSupported && self.position == .front { return }
+        if gesture.state == .changed {
+
+            let scale = Double(gesture.scale)
+            
+            var preZoomFactor: Double = .zero
+            var zoomFactor: Double = .zero
+            
+            // 전면 또는 후면 카메라에 따라 줌 값 계산
+            if position == .front {
+                preZoomFactor = frontCameraCurrentZoomFactor * scale
+                zoomFactor = min(max(preZoomFactor, self.frontCameraMinimumZoonFactor), self.frontCameraMaximumZoonFactor)
+            } else {
+                preZoomFactor = backCameraCurrentZoomFactor * scale
+                zoomFactor = min(max(preZoomFactor, self.backCameraMinimumZoonFactor), self.backCameraMaximumZoonFactor)
+            }
+            
+            // 줌 값 적용
+            self.setZoom(position: position, zoomFactor: zoomFactor)
+            
+            // 스케일 값 초기화
+            gesture.scale = 1.0
+        }
+    }
     
     ///
     /// 카메라 init 함수
@@ -628,7 +693,6 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             self.position = position
             
             if self.isMultiCamSupported {
-                self.setZoom(position: position, zoomFactor: position == .front ? self.frontCameraCurrentZoomFactor : self.backCameraDefaultZoomFactor)
                 self.setMirrorMode(isMirrorMode: position == .front)
             } else {
                 if position == .back {
@@ -759,29 +823,26 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     ///
     @objc
     func handlePinchCamera(_ scale: CGFloat) {
+        let currentPostion = self.isMultiCamSupported ? self.mainCameraPostion : self.position
         
-        if let device = self.position == .front ? self.frontCamera : self.backCamera {
-            
-            var preZoomFactor:Double = .zero
-            var zoomFactor:Double = .zero
-            
-            if self.position == .front {
-                preZoomFactor = frontCameraCurrentZoomFactor * scale
-                zoomFactor = min(max(preZoomFactor, self.frontCameraMinimumZoonFactor), self.frontCameraMaximumZoonFactor)
-            } else {
-                preZoomFactor = backCameraCurrentZoomFactor * scale
-                zoomFactor = min(max(preZoomFactor, self.backCameraMinimumZoonFactor), self.backCameraMaximumZoonFactor)
-            }
-            
-            self.setZoom(position: position, zoomFactor: zoomFactor)
-
+        var preZoomFactor:Double = .zero
+        var zoomFactor:Double = .zero
+        
+        if self.position == .front {
+            preZoomFactor = frontCameraCurrentZoomFactor * scale
+            zoomFactor = min(max(preZoomFactor, self.frontCameraMinimumZoonFactor), self.frontCameraMaximumZoonFactor)
+        } else {
+            preZoomFactor = backCameraCurrentZoomFactor * scale
+            zoomFactor = min(max(preZoomFactor, self.backCameraMinimumZoonFactor), self.backCameraMaximumZoonFactor)
         }
+        
+        self.setZoom(position: currentPostion, zoomFactor: zoomFactor)
     }
     
     func setZoom(position: AVCaptureDevice.Position, zoomFactor: CGFloat) {
-        if let device = self.position == .front ? self.frontCamera : self.backCamera {
-            
-            if self.position == .front {
+        if let device = position == .front ? self.frontCamera : self.backCamera {
+
+            if position == .front {
                 self.frontCameraCurrentZoomFactor = zoomFactor
             } else {
                 self.backCameraCurrentZoomFactor = zoomFactor
