@@ -24,6 +24,7 @@ class SampleCameraViewModel: ObservableObject {
     }
     
     public func unreference() {
+        self.cameraManager?.unreference()
         self.cameraManager = nil
     }
     
