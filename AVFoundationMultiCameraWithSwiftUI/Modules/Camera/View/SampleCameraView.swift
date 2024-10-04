@@ -58,26 +58,8 @@ struct SampleCameraView: View {
                 )
                 .animation(.default)
 
-            UIKitViewRepresentable(view: vm.cameraManager?.mainCameraView)
+            UIKitViewRepresentable(view: vm.cameraManager?.multiCameraView)
                 .frame(height: (UIScreen.main.bounds.width / 9)  * 16 )
-                .overlay(
-                    VStack {
-                        Spacer().frame(height: 10)
-                        
-                        HStack {
-                            Spacer()
-                            UIKitViewRepresentable(view: vm.cameraManager?.smallCameraView)
-                                .frame(width: UIScreen.main.bounds.width / 4 ,height: ((UIScreen.main.bounds.width / 4) / 9)  * 16 )
-                                .onTapGesture {
-                                    self.vm.toggleMainCameraPostion()
-                                }
-                            
-                            Spacer().frame(width: 10)
-                        }
-                        
-                        Spacer()
-                    }
-                )
                 .overlay(
                     VStack {
                         Spacer()
@@ -119,6 +101,7 @@ struct SampleCameraView: View {
                 )
                 .opacity(self.vm.cameraManager?.cameraViewMode == .doubleScreen ? 1 : 0)
                 .animation(.default)
+                
         }
         .onDisappear {
             self.vm.unreference()

@@ -10,13 +10,13 @@ import Foundation
 
 class SampleCameraViewModel: ObservableObject {
     var cameraManager: CameraManager?
-    @Published var isSingleScreenMode: Bool = true
+    @Published var isSingleScreenMode: Bool = false
     
     var isFrontCamera: Bool = false
     var isFrontMainCamera: Bool = false
 
     init() {
-        self.cameraManager = CameraManager(cameraViewMode: .singleScreen)
+        self.cameraManager = CameraManager(cameraViewMode: .doubleScreen)
     }
     
     deinit {
