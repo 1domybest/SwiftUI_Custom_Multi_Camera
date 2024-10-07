@@ -18,14 +18,21 @@ View자체는 호스팅뷰 컨트롤러를 사용하여 SwiftUI 와 결합하였
 
 # doubleView Handling
 
-![doubleView (1)](https://github.com/user-attachments/assets/16b20a08-196e-4969-86ad-300f8186e455)
+![doubleView (1)](https://github.com/user-attachments/assets/7dec2e7d-abd9-4b47-bd75-269be4fe20bd)
 
 
 # switchCameraPostion
 
-![switchCamera (1)](https://github.com/user-attachments/assets/13821739-03f8-4f54-abb0-e1578238a955)
+![switchCamera (1)](https://github.com/user-attachments/assets/3b306017-f6ed-4af8-9c61-c003dda8d6ce)
 
 
 # zoom Camera
 
-![Zoom (1)](https://github.com/user-attachments/assets/5bc87153-b00f-49b6-b104-a2aa58cceba0)
+![Zoom (1)](https://github.com/user-attachments/assets/3288293f-139d-4865-b135-144241dc25d3)
+
+
+
+
+
+
+
