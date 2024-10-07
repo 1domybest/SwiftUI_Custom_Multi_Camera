@@ -15,3 +15,17 @@ AVFoundation을 사용하여 IOS13 아래의 아이폰은 단일 카메라를 �
 그 이후 버전에서는 멀티카메라 세션을 사용한 반응성 좋은 카메라 샘플 코드입니다.
 
 View자체는 호스팅뷰 컨트롤러를 사용하여 SwiftUI 와 결합하였고 기본적으로 MVVM 아키텍처를 사용하였습니다.
+
+# doubleView Handling
+
+![doubleView (1)](https://github.com/user-attachments/assets/16b20a08-196e-4969-86ad-300f8186e455)
+
+
+# switchCameraPostion
+
+![switchCamera (1)](https://github.com/user-attachments/assets/13821739-03f8-4f54-abb0-e1578238a955)
+
+
+# zoom Camera
+
+![Zoom (1)](https://github.com/user-attachments/assets/5bc87153-b00f-49b6-b104-a2aa58cceba0)
