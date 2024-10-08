@@ -16,6 +16,10 @@ AVFoundation을 사용하여 IOS13 아래의 아이폰은 단일 카메라를 �
 
 View자체는 호스팅뷰 컨트롤러를 사용하여 SwiftUI 와 결합하였고 기본적으로 MVVM 아키텍처를 사용하였습니다.
 
+the original gif files are in sample folder
+
+gif 원본파일은 sample 폴더에 있습니다.
+
 # doubleView Handling
 
 ![doubleView (1)](https://github.com/user-attachments/assets/7dec2e7d-abd9-4b47-bd75-269be4fe20bd)
