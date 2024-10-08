@@ -20,6 +20,9 @@ the original gif files are in sample folder
 
 gif 원본파일은 sample 폴더에 있습니다.
 
+**and if this help your code please give me star! its on the top right 
+혹시 이 코드가 도움이 되셨다면 오른쪽 상단에 별을 주세요! 오른쪽 상단에 있습니다!**
+
 # doubleView Handling
 
 ![doubleView (1)](https://github.com/user-attachments/assets/7dec2e7d-abd9-4b47-bd75-269be4fe20bd)
@@ -33,6 +36,8 @@ gif 원본파일은 sample 폴더에 있습니다.
 # zoom Camera
 
 ![Zoom (1)](https://github.com/user-attachments/assets/3288293f-139d-4865-b135-144241dc25d3)
+
+
 
 
 
