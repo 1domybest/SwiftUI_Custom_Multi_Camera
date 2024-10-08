@@ -20,7 +20,7 @@ the original gif files are in sample folder
 
 gif 원본파일은 sample 폴더에 있습니다.
 
-**and if this help your code please give me star! its on the top right**
+**and if this help your code please give me star! its on the top right** <br/>
 **혹시 이 코드가 도움이 되셨다면 오른쪽 상단에 별을 주세요! 오른쪽 상단에 있습니다!**
 
 # doubleView Handling
