@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import OtisLogManagerLibrary
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -21,6 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         navigationController.showRootView()
         window?.makeKeyAndVisible()
+        
+        let _ = OtisLogManagerLibrary(projectName: "AVFoundationMultiCameraWithSwiftUI")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
