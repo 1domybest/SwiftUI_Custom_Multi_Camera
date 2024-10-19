@@ -34,6 +34,9 @@
 		D189E3342CC244CC00E36153 /* OtisLogManagerLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = D189E3332CC244CC00E36153 /* OtisLogManagerLibrary */; };
 		D1951FBD2CC1FE1E00744C29 /* Pods_AVFoundationMultiCameraWithSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1A81BC146CF40699C99559 /* Pods_AVFoundationMultiCameraWithSwiftUI.framework */; };
 		D1951FBE2CC1FE1E00744C29 /* Pods_AVFoundationMultiCameraWithSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1A81BC146CF40699C99559 /* Pods_AVFoundationMultiCameraWithSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D1D288492CC2501500B5ACE4 /* AudioMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D288482CC2501500B5ACE4 /* AudioMananger.swift */; };
+		D1D2884B2CC2504700B5ACE4 /* DeviceMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D2884A2CC2504700B5ACE4 /* DeviceMananger.swift */; };
+		D1D2884D2CC35E1800B5ACE4 /* MultiCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D2884C2CC35E1800B5ACE4 /* MultiCameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,6 +84,9 @@
 		D13362412CAE789600CA7B00 /* CameraViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewMode.swift; sourceTree = "<group>"; };
 		D1951FB92CC1FE1A00744C29 /* OTIS_LogBoardManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OTIS_LogBoardManager.xcframework; path = AVFoundationMultiCameraWithSwiftUI/OTIS_LogBoardManager.xcframework; sourceTree = "<group>"; };
 		D1951FD92CC20C7100744C29 /* TestFrameWorkd.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TestFrameWorkd.xcframework; path = AVFoundationMultiCameraWithSwiftUI/TestFrameWorkd.xcframework; sourceTree = "<group>"; };
+		D1D288482CC2501500B5ACE4 /* AudioMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMananger.swift; sourceTree = "<group>"; };
+		D1D2884A2CC2504700B5ACE4 /* DeviceMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMananger.swift; sourceTree = "<group>"; };
+		D1D2884C2CC35E1800B5ACE4 /* MultiCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiCameraView.swift; sourceTree = "<group>"; };
 		D3B3CE7F2F8A3DC3D1DB6B65 /* Pods-AVFoundationMultiCameraWithSwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AVFoundationMultiCameraWithSwiftUI.debug.xcconfig"; path = "Target Support Files/Pods-AVFoundationMultiCameraWithSwiftUI/Pods-AVFoundationMultiCameraWithSwiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -231,6 +237,7 @@
 				D133622B2CAE787D00CA7B00 /* CameraMetalShader.metal */,
 				D133622C2CAE787D00CA7B00 /* Vertex.swift */,
 				D133622D2CAE787D00CA7B00 /* CameraMetalView.swift */,
+				D1D2884C2CC35E1800B5ACE4 /* MultiCameraView.swift */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -240,6 +247,8 @@
 			children = (
 				D133623C2CAE789000CA7B00 /* CameraManager.swift */,
 				D133623D2CAE789000CA7B00 /* CameraUIView.swift */,
+				D1D288482CC2501500B5ACE4 /* AudioMananger.swift */,
+				D1D2884A2CC2504700B5ACE4 /* DeviceMananger.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -355,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1D2884B2CC2504700B5ACE4 /* DeviceMananger.swift in Sources */,
 				D13361FF2CAE77E500CA7B00 /* AppDelegate.swift in Sources */,
 				D13362002CAE77E500CA7B00 /* SceneDelegate.swift in Sources */,
 				D133621C2CAE782000CA7B00 /* CustomNavigationController.swift in Sources */,
@@ -362,6 +372,7 @@
 				D133621E2CAE782000CA7B00 /* NavigationControllerEnum.swift in Sources */,
 				D133621F2CAE782000CA7B00 /* NavigationController.swift in Sources */,
 				D13362212CAE782000CA7B00 /* UIViewController.swift in Sources */,
+				D1D288492CC2501500B5ACE4 /* AudioMananger.swift in Sources */,
 				D13362232CAE782000CA7B00 /* NavigationCallbackProtocol.swift in Sources */,
 				D13362242CAE782000CA7B00 /* CustomHostingController.swift in Sources */,
 				D133623F2CAE789000CA7B00 /* CameraUIView.swift in Sources */,
@@ -376,6 +387,7 @@
 				D13362372CAE787D00CA7B00 /* CameraMetalShader.metal in Sources */,
 				D13362422CAE789600CA7B00 /* CameraViewMode.swift in Sources */,
 				D13362252CAE782000CA7B00 /* ContentView.swift in Sources */,
+				D1D2884D2CC35E1800B5ACE4 /* MultiCameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

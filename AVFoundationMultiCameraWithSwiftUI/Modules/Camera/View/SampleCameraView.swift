@@ -13,7 +13,7 @@ struct SampleCameraView: View {
     
     var body: some View {
         ZStack {
-            UIKitViewRepresentable(view: vm.cameraManager?.singleCameraView)
+            UIKitViewRepresentable(view: vm.deviceMananger?.cameraManager?.singleCameraView)
                 .frame(height: (UIScreen.main.bounds.width / 9)  * 16 )
                 .overlay(
                     VStack {
@@ -58,7 +58,7 @@ struct SampleCameraView: View {
                 )
                 .animation(.default)
 
-            UIKitViewRepresentable(view: vm.cameraManager?.multiCameraView)
+            UIKitViewRepresentable(view: vm.deviceMananger?.cameraManager?.multiCameraView)
                 .frame(height: (UIScreen.main.bounds.width / 9)  * 16 )
                 .overlay(
                     VStack {
@@ -99,7 +99,7 @@ struct SampleCameraView: View {
                         Spacer().frame(height: 10)
                     }
                 )
-                .opacity(self.vm.cameraManager?.cameraViewMode == .doubleScreen ? 1 : 0)
+                .opacity(self.vm.deviceMananger?.cameraManager?.cameraViewMode == .doubleScreen ? 1 : 0)
                 .animation(.default)
                 
         }

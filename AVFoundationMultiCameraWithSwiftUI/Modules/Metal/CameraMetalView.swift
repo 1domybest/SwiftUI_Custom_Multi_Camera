@@ -11,9 +11,11 @@ import MetalKit
 import UIKit
 import CoreVideo
 import SwiftUI
+import AVFoundation
 
 public class CameraMetalView: MTKView {
     public var buffer: CMSampleBuffer?
+    public var position: AVCaptureDevice.Position?
     private var context: CIContext?
     var metalDevice: MTLDevice!
     var metalCommandQueue: MTLCommandQueue!
@@ -30,7 +32,7 @@ public class CameraMetalView: MTKView {
     
     var appendQueueCallback: AppendQueueProtocol?
     
-    public init() {
+    init(appendQueueCallback: AppendQueueProtocol) {
         super.init(frame: .zero, device: MTLCreateSystemDefaultDevice())
         if let metalDevice = MTLCreateSystemDefaultDevice() {
             self.metalDevice = metalDevice
@@ -39,6 +41,8 @@ public class CameraMetalView: MTKView {
             self.setupSampler()
             self.setupVertices()
         }
+        self.appendQueueCallback = appendQueueCallback
+        
 
         awakeFromNib()
         self.context = CIContext(mtlDevice: device!)
@@ -52,8 +56,8 @@ public class CameraMetalView: MTKView {
         super.init(coder: coder)
     }
     
-    func setAppendQueueCallback(appendQueueCallback: AppendQueueProtocol) {
-        self.appendQueueCallback = appendQueueCallback
+    public func unreference() {
+        appendQueueCallback = nil
     }
     
     override open func awakeFromNib() {
@@ -68,13 +72,14 @@ public class CameraMetalView: MTKView {
         self.setNeedsDisplay()
     }
     
-    public func update(buffer: CMSampleBuffer) {
+    public func update(buffer: CMSampleBuffer, position: AVCaptureDevice.Position) {
         if Thread.isMainThread {
+            self.position = position
             self.buffer = buffer
             setNeedsDisplay()
         } else {
             DispatchQueue.main.async {
-                self.update(buffer: buffer)
+                self.update(buffer: buffer, position: position)
             }
         }
     }
@@ -145,6 +150,7 @@ extension CameraMetalView: MTKViewDelegate {
               let commandBuffer = metalCommandQueue.makeCommandBuffer(),
               let renderPassDescriptor = view.currentRenderPassDescriptor,
               let buffer = self.buffer,
+              let position = self.position,
               let texture = texture(from: buffer) else {
             return
         }
@@ -199,7 +205,7 @@ extension CameraMetalView: MTKViewDelegate {
                 image = processSampleBuffer(buffer, rotationAngle: ratationAngle)
             }
             
-            appendQueueCallback?.appendVideoQueue(pixelBuffer: image!, time: time)
+            appendQueueCallback?.appendVideoQueue(pixelBuffer: image!, time: time, position: position)
             
           } catch let error {
               print("Failed to create pipeline state, error: \(error)")

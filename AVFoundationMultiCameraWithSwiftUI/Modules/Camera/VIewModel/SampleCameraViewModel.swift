@@ -9,14 +9,14 @@ import Foundation
 
 
 class SampleCameraViewModel: ObservableObject {
-    var cameraManager: CameraManager?
+    var deviceMananger: DeviceMananger?
     @Published var isSingleScreenMode: Bool = false
     
     var isFrontCamera: Bool = false
     var isFrontMainCamera: Bool = false
 
     init() {
-        self.cameraManager = CameraManager(cameraViewMode: .doubleScreen)
+        self.deviceMananger = DeviceMananger()
     }
     
     deinit {
@@ -24,25 +24,25 @@ class SampleCameraViewModel: ObservableObject {
     }
     
     public func unreference() {
-        self.cameraManager?.unreference()
-        self.cameraManager = nil
+        self.deviceMananger?.unreference()
+        self.deviceMananger = nil
     }
     
     func toggleCameraPostion () {
-        self.isFrontCamera = self.cameraManager?.position == .front
+        self.isFrontCamera = self.deviceMananger?.cameraManager?.position == .front
         self.isFrontCamera.toggle()
-        self.cameraManager?.setPosition(self.isFrontCamera ? .front : .back)
+        self.deviceMananger?.cameraManager?.setPosition(self.isFrontCamera ? .front : .back)
     }
     
     
     func toggleMainCameraPostion () {
-        self.isFrontMainCamera = self.cameraManager?.mainCameraPostion == .front
+        self.isFrontMainCamera = self.deviceMananger?.cameraManager?.mainCameraPostion == .front
         self.isFrontMainCamera.toggle()
-        self.cameraManager?.switchMainCamera(mainCameraPostion: self.isFrontMainCamera ? .front : .back)
+        self.deviceMananger?.cameraManager?.switchMainCamera(mainCameraPostion: self.isFrontMainCamera ? .front : .back)
     }
     
     func switchScreenMode() {
-        self.cameraManager?.setCameraViewMode(cameraViewMode: !self.isSingleScreenMode ? .singleScreen : .doubleScreen)
+        self.deviceMananger?.cameraManager?.setCameraViewMode(cameraViewMode: !self.isSingleScreenMode ? .singleScreen : .doubleScreen)
         self.isSingleScreenMode.toggle()
     }
     

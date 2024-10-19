@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.showRootView()
         window?.makeKeyAndVisible()
         
-        let _ = OtisLogManagerLibrary(projectName: "AVFoundationMultiCameraWithSwiftUI")
+//        let _ = OtisLogManagerLibrary(projectName: "AVFoundationMultiCameraWithSwiftUI")
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
