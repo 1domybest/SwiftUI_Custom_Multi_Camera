@@ -28,9 +28,11 @@
 		D13362372CAE787D00CA7B00 /* CameraMetalShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = D133622B2CAE787D00CA7B00 /* CameraMetalShader.metal */; };
 		D133623A2CAE788700CA7B00 /* CameraOutputCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13362392CAE788700CA7B00 /* CameraOutputCallback.swift */; };
 		D133623B2CAE788700CA7B00 /* AppendQueueProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13362382CAE788700CA7B00 /* AppendQueueProtocol.swift */; };
-		D133623F2CAE789000CA7B00 /* CameraUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D133623D2CAE789000CA7B00 /* CameraUIView.swift */; };
 		D13362402CAE789000CA7B00 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D133623C2CAE789000CA7B00 /* CameraManager.swift */; };
 		D13362422CAE789600CA7B00 /* CameraViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13362412CAE789600CA7B00 /* CameraViewMode.swift */; };
+		D16CA1B72CC36123002CF504 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16CA1B62CC36123002CF504 /* RecordManager.swift */; };
+		D16CA1B92CC36A33002CF504 /* RecordManangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16CA1B82CC36A33002CF504 /* RecordManangerProtocol.swift */; };
+		D16CA1BB2CC36C8A002CF504 /* DeviceManangerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16CA1BA2CC36C8A002CF504 /* DeviceManangerProtocol.swift */; };
 		D189E3342CC244CC00E36153 /* OtisLogManagerLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = D189E3332CC244CC00E36153 /* OtisLogManagerLibrary */; };
 		D1951FBD2CC1FE1E00744C29 /* Pods_AVFoundationMultiCameraWithSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1A81BC146CF40699C99559 /* Pods_AVFoundationMultiCameraWithSwiftUI.framework */; };
 		D1951FBE2CC1FE1E00744C29 /* Pods_AVFoundationMultiCameraWithSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1A81BC146CF40699C99559 /* Pods_AVFoundationMultiCameraWithSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -80,8 +82,10 @@
 		D13362382CAE788700CA7B00 /* AppendQueueProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendQueueProtocol.swift; sourceTree = "<group>"; };
 		D13362392CAE788700CA7B00 /* CameraOutputCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraOutputCallback.swift; sourceTree = "<group>"; };
 		D133623C2CAE789000CA7B00 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
-		D133623D2CAE789000CA7B00 /* CameraUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraUIView.swift; sourceTree = "<group>"; };
 		D13362412CAE789600CA7B00 /* CameraViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewMode.swift; sourceTree = "<group>"; };
+		D16CA1B62CC36123002CF504 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
+		D16CA1B82CC36A33002CF504 /* RecordManangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManangerProtocol.swift; sourceTree = "<group>"; };
+		D16CA1BA2CC36C8A002CF504 /* DeviceManangerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManangerProtocol.swift; sourceTree = "<group>"; };
 		D1951FB92CC1FE1A00744C29 /* OTIS_LogBoardManager.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OTIS_LogBoardManager.xcframework; path = AVFoundationMultiCameraWithSwiftUI/OTIS_LogBoardManager.xcframework; sourceTree = "<group>"; };
 		D1951FD92CC20C7100744C29 /* TestFrameWorkd.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = TestFrameWorkd.xcframework; path = AVFoundationMultiCameraWithSwiftUI/TestFrameWorkd.xcframework; sourceTree = "<group>"; };
 		D1D288482CC2501500B5ACE4 /* AudioMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioMananger.swift; sourceTree = "<group>"; };
@@ -172,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				D133622A2CAE787D00CA7B00 /* Camera */,
-				D133622E2CAE787D00CA7B00 /* Metal */,
 				D13362302CAE787D00CA7B00 /* UIKitViewRepresentable.swift */,
 			);
 			path = Modules;
@@ -193,6 +196,8 @@
 				D13362152CAE782000CA7B00 /* NavigationCallbackProtocol.swift */,
 				D13362382CAE788700CA7B00 /* AppendQueueProtocol.swift */,
 				D13362392CAE788700CA7B00 /* CameraOutputCallback.swift */,
+				D16CA1B82CC36A33002CF504 /* RecordManangerProtocol.swift */,
+				D16CA1BA2CC36C8A002CF504 /* DeviceManangerProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -245,12 +250,45 @@
 		D133623E2CAE789000CA7B00 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				D133623C2CAE789000CA7B00 /* CameraManager.swift */,
-				D133623D2CAE789000CA7B00 /* CameraUIView.swift */,
-				D1D288482CC2501500B5ACE4 /* AudioMananger.swift */,
-				D1D2884A2CC2504700B5ACE4 /* DeviceMananger.swift */,
+				D16CA1B52CC36110002CF504 /* Media */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		D16CA1B22CC360A8002CF504 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				D133622E2CAE787D00CA7B00 /* Metal */,
+				D133623C2CAE789000CA7B00 /* CameraManager.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		D16CA1B32CC360BD002CF504 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				D1D288482CC2501500B5ACE4 /* AudioMananger.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		D16CA1B42CC36107002CF504 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				D16CA1B62CC36123002CF504 /* RecordManager.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		D16CA1B52CC36110002CF504 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				D16CA1B42CC36107002CF504 /* Record */,
+				D16CA1B32CC360BD002CF504 /* Audio */,
+				D16CA1B22CC360A8002CF504 /* Camera */,
+				D1D2884A2CC2504700B5ACE4 /* DeviceMananger.swift */,
+			);
+			path = Media;
 			sourceTree = "<group>";
 		};
 		E143719DE0D2437C9D2969BA /* Frameworks */ = {
@@ -364,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D16CA1B72CC36123002CF504 /* RecordManager.swift in Sources */,
 				D1D2884B2CC2504700B5ACE4 /* DeviceMananger.swift in Sources */,
 				D13361FF2CAE77E500CA7B00 /* AppDelegate.swift in Sources */,
 				D13362002CAE77E500CA7B00 /* SceneDelegate.swift in Sources */,
@@ -373,15 +412,16 @@
 				D133621F2CAE782000CA7B00 /* NavigationController.swift in Sources */,
 				D13362212CAE782000CA7B00 /* UIViewController.swift in Sources */,
 				D1D288492CC2501500B5ACE4 /* AudioMananger.swift in Sources */,
+				D16CA1BB2CC36C8A002CF504 /* DeviceManangerProtocol.swift in Sources */,
 				D13362232CAE782000CA7B00 /* NavigationCallbackProtocol.swift in Sources */,
 				D13362242CAE782000CA7B00 /* CustomHostingController.swift in Sources */,
-				D133623F2CAE789000CA7B00 /* CameraUIView.swift in Sources */,
 				D13362402CAE789000CA7B00 /* CameraManager.swift in Sources */,
 				D13362312CAE787D00CA7B00 /* SampleCameraViewModel.swift in Sources */,
 				D13362322CAE787D00CA7B00 /* UIKitViewRepresentable.swift in Sources */,
 				D13362332CAE787D00CA7B00 /* SampleCameraView.swift in Sources */,
 				D13362352CAE787D00CA7B00 /* CameraMetalView.swift in Sources */,
 				D13362362CAE787D00CA7B00 /* Vertex.swift in Sources */,
+				D16CA1B92CC36A33002CF504 /* RecordManangerProtocol.swift in Sources */,
 				D133623A2CAE788700CA7B00 /* CameraOutputCallback.swift in Sources */,
 				D133623B2CAE788700CA7B00 /* AppendQueueProtocol.swift in Sources */,
 				D13362372CAE787D00CA7B00 /* CameraMetalShader.metal in Sources */,
@@ -427,6 +467,7 @@
 				INFOPLIST_FILE = AVFoundationMultiCameraWithSwiftUI/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -460,6 +501,7 @@
 				INFOPLIST_FILE = AVFoundationMultiCameraWithSwiftUI/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

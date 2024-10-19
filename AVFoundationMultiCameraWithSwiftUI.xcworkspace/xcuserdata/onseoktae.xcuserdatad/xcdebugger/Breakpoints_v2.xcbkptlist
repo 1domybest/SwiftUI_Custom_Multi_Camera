@@ -7,32 +7,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6226094A-37B9-401E-9C20-11EB8D411309"
+            uuid = "E0C85805-33EF-4EB0-8967-8BF8B0359891"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AVFoundationMultiCameraWithSwiftUI/Modules/UIKitViewRepresentable.swift"
+            filePath = "AVFoundationMultiCameraWithSwiftUI/Modules/Camera/View/SampleCameraView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "updateUIView(_:context:)"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B5407BF6-0A50-490F-83D1-EECF778320F4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AVFoundationMultiCameraWithSwiftUI/Modules/Camera/View/SampleCameraView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2CE577B9-744E-4412-ADEA-A4DFD04DE41A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AVFoundationMultiCameraWithSwiftUI/Manager/Media/DeviceMananger.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "appendAudioQueue(sampleBuffer:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0EBA9D9C-B44D-4650-A987-9ADA81861C4A"
+            uuid = "A8B24B4C-9BD6-4CDD-B671-FDF4ADC6444A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AVFoundationMultiCameraWithSwiftUI/Manager/CameraManager.swift"
+            filePath = "AVFoundationMultiCameraWithSwiftUI/Manager/Media/DeviceMananger.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "unreference()"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "appendVideoQueue(pixelBuffer:time:position:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D384CA9C-DF88-4789-A395-29D70EFF1475"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AVFoundationMultiCameraWithSwiftUI/Manager/Media/DeviceMananger.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "appendVideoQueue(pixelBuffer:time:position:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

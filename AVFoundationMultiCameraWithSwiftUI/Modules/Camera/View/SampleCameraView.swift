@@ -22,7 +22,7 @@ struct SampleCameraView: View {
                             Spacer().frame(width: 10)
                             
                             Button(action: {
-                                self.vm.switchScreenMode()
+                                self.vm.switchMultiSessionScreenMode()
                             }, label: {
                                 Text("DoubleCamera")
                                     .font(.system(size: 16))
@@ -35,10 +35,11 @@ struct SampleCameraView: View {
                                         
                                     )
                             })
+                            .opacity(self.vm.cameraSessionMode == .multiSession ? 1 : 0)
                             
                             Spacer()
                             Button(action: {
-                                self.vm.toggleCameraPostion()
+                                self.vm.toggleSingleSessionCameraPostion()
                             }, label: {
                                 Text("switchPostion")
                                     .font(.system(size: 16))
@@ -66,7 +67,7 @@ struct SampleCameraView: View {
                         HStack {
                             Spacer().frame(width: 10)
                             Button(action: {
-                                self.vm.switchScreenMode()
+                                self.vm.switchMultiSessionScreenMode()
                             }, label: {
                                 Text("singleCamera")
                                     .font(.system(size: 16))
@@ -81,7 +82,7 @@ struct SampleCameraView: View {
                             })
                             Spacer()
                             Button(action: {
-                                self.vm.toggleMainCameraPostion()
+                                self.vm.toggleMultiSessionCameraPostion()
                             }, label: {
                                 Text("switchCamera")
                                     .font(.system(size: 16))
@@ -103,6 +104,34 @@ struct SampleCameraView: View {
                 .animation(.default)
                 
         }
+        .overlay (
+            ZStack {
+                VStack {
+                    Spacer()
+                    Button(action: {
+                        if !self.vm.isRecording {
+                            self.vm.deviceMananger?.singleRecordManager?.startVideoRecording()
+                            if self.vm.cameraSessionMode == .multiSession && self.vm.cameraViewMode == .doubleScreen {
+                                self.vm.deviceMananger?.doubleRecordManager?.startVideoRecording()
+                            }
+                            
+                        } else {
+                            self.vm.deviceMananger?.singleRecordManager?.stopVideoRecording()
+                            if self.vm.cameraSessionMode == .multiSession && self.vm.cameraViewMode == .doubleScreen {
+                                self.vm.deviceMananger?.doubleRecordManager?.stopVideoRecording()
+                            }
+                        }
+//                        
+                    }, label: {
+                        Circle()
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(!self.vm.isRecording ? Color.red : Color.blue)
+                    })
+                    
+                    Spacer().frame(height: 150)
+                }
+            }
+        )
         .onDisappear {
             self.vm.unreference()
         }

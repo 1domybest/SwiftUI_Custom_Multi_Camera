@@ -6,17 +6,32 @@
 //
 
 import Foundation
+import AVFoundation
 
 
 class SampleCameraViewModel: ObservableObject {
     var deviceMananger: DeviceMananger?
     @Published var isSingleScreenMode: Bool = false
+    @Published var isRecording: Bool = false
     
     var isFrontCamera: Bool = false
     var isFrontMainCamera: Bool = false
 
+    @Published var cameraViewMode:CameraViewMode = .singleScreen
+    @Published var cameraSessionMode:CameraSessionMode = .multiSession
+    var isMultiCamSupported:Bool = false
     init() {
-        self.deviceMananger = DeviceMananger()
+        self.isMultiCamSupported = AVCaptureMultiCamSession.isMultiCamSupported
+        
+        if !self.isMultiCamSupported {
+            self.cameraSessionMode = .singleSession
+            self.cameraViewMode = .singleScreen
+        }
+        
+        self.deviceMananger = DeviceMananger(cameraViewMode: self.cameraViewMode, cameraSessionMode: self.cameraSessionMode)
+        
+        self.deviceMananger?.singleRecordManager?.setRecordManangerProtocol(recordManangerProtocol: self)
+        self.deviceMananger?.doubleRecordManager?.setRecordManangerProtocol(recordManangerProtocol: self)
     }
     
     deinit {
@@ -27,23 +42,57 @@ class SampleCameraViewModel: ObservableObject {
         self.deviceMananger?.unreference()
         self.deviceMananger = nil
     }
-    
-    func toggleCameraPostion () {
+}
+
+// SingleSession
+extension SampleCameraViewModel {
+    func toggleSingleSessionCameraPostion () {
         self.isFrontCamera = self.deviceMananger?.cameraManager?.position == .front
         self.isFrontCamera.toggle()
-        self.deviceMananger?.cameraManager?.setPosition(self.isFrontCamera ? .front : .back)
+        self.deviceMananger?.setSingleSessionCameraPostion(postion: self.isFrontCamera ? .front : .back)
+    }
+}
+
+// MultiSession
+extension SampleCameraViewModel {
+    
+    func toggleMultiSessionCameraPostion () {
+        if self.isRecording { return }
+        if self.cameraSessionMode == .multiSession {
+            self.isFrontMainCamera = self.deviceMananger?.cameraManager?.mainCameraPostion == .front
+            self.isFrontMainCamera.toggle()
+            self.deviceMananger?.setMultiSessionCameraPostion(postion: self.isFrontMainCamera ? .front : .back)
+        }
     }
     
+    func switchMultiSessionScreenMode() {
+        if self.isRecording { return }
+        if self.cameraSessionMode == .multiSession {
+            self.cameraViewMode = self.cameraViewMode == .singleScreen ? .doubleScreen : .singleScreen
+            self.deviceMananger?.setMultiSessionScreenMode(cameraViewMode: self.cameraViewMode)
+        }
+    }
+}
+
+
+extension SampleCameraViewModel:RecordManangerProtocol {
     
-    func toggleMainCameraPostion () {
-        self.isFrontMainCamera = self.deviceMananger?.cameraManager?.mainCameraPostion == .front
-        self.isFrontMainCamera.toggle()
-        self.deviceMananger?.cameraManager?.switchMainCamera(mainCameraPostion: self.isFrontMainCamera ? .front : .back)
+    func statusDidChange(captureStatus: CaptureStatus) {
     }
     
-    func switchScreenMode() {
-        self.deviceMananger?.cameraManager?.setCameraViewMode(cameraViewMode: !self.isSingleScreenMode ? .singleScreen : .doubleScreen)
-        self.isSingleScreenMode.toggle()
+    func onStartRecord() {
+        if !isRecording {
+            DispatchQueue.main.async {
+                self.isRecording = true
+            }
+        }
     }
     
+    func onFinishedRecord(fileURL: URL, position: AVCaptureDevice.Position) {
+        if isRecording {
+            DispatchQueue.main.async {
+                self.isRecording = false
+            }
+        }
+    }
 }

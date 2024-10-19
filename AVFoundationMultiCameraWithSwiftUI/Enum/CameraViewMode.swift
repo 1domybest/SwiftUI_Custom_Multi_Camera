@@ -12,3 +12,8 @@ enum CameraViewMode {
     case singleScreen
     case doubleScreen
 }
+
+enum CameraSessionMode {
+    case singleSession
+    case multiSession
+}

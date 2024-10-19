@@ -23,6 +23,7 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     // 공통
     var cameraViewMode: CameraViewMode = .doubleScreen
+    var cameraSessionMode: CameraSessionMode = .multiSession
     
     private var delgate: CameraOutputCallback? // 프레임 콜백
     var appendQueueCallback: AppendQueueProtocol? // 렌더링후 실행하는 콜백
@@ -106,8 +107,16 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     var displayLink: CADisplayLink? // 카메라 종료시 반복문으로 돌릴 링크
     
-    init(cameraViewMode: CameraViewMode) {
+    init(cameraSessionMode: CameraSessionMode, cameraViewMode: CameraViewMode) {
+        self.isMultiCamSupported = AVCaptureMultiCamSession.isMultiCamSupported
+        
         self.cameraViewMode = cameraViewMode
+        self.cameraSessionMode = cameraSessionMode
+        
+        if cameraSessionMode == .singleSession || !self.isMultiCamSupported {
+            self.cameraViewMode = .singleScreen
+        }
+        
         super.init()
         
         
@@ -115,11 +124,10 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         sessionQueue = DispatchQueue(label: "camera.single.sessionqueue", attributes: attr)
         videoDataOutputQueue = DispatchQueue(label: "camera.single.videoDataOutputQueue")
 
-        self.isMultiCamSupported = AVCaptureMultiCamSession.isMultiCamSupported
-        
+      
         self.singleCameraView = CameraMetalView(appendQueueCallback: self)
         
-        if self.isMultiCamSupported {
+        if self.cameraSessionMode == .multiSession {
             self.multiCameraView = MultiCameraView(parent: self, appendQueueCallback: self)
             self.setupMultiCaptureSessions()
         } else {
@@ -140,6 +148,12 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         NotificationCenter.default.removeObserver(self)
     }
     
+    ///
+    /// 참조 해제
+    ///
+    /// - Parameters:
+    /// - Returns:
+    ///
     public func unreference() {
         self.multiCameraView?.unreference()
         self.multiCameraView = nil
@@ -150,6 +164,12 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         self.appendQueueCallback = nil
     }
     
+    ///
+    /// 줌을 위한 핀치 제스처 등록
+    ///
+    /// - Parameters:
+    /// - Returns:
+    ///
     func setupGestureRecognizers() {
         // 단일 카메라 뷰에 핀치 제스처 추가
         let singleCameraPinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(singleViewHandlePinchGesture(_:)))
@@ -157,6 +177,12 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     
+    ///
+    /// 작은뷰 드레그를 위한 판 제스처 등록
+    ///
+    /// - Parameters:
+    /// - Returns:
+    ///
     func setupPanGesture() {
         // 서브 카메라 뷰에 드래그 제스처 추가
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(smallViewHandlePanGesture(_:)))
@@ -165,6 +191,12 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         multiCameraView?.addGestureRecognizer(panGesture)
     }
     
+    ///
+    /// 작은뷰 드레그를 이벤트 리스너
+    ///
+    /// - Parameters:
+    /// - Returns:
+    ///
     @objc func smallViewHandlePanGesture(_ gesture: UIPanGestureRecognizer) {
         
         guard let view = gesture.view else { return }
@@ -188,9 +220,15 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
+    ///
+    /// 핀치줌 이벤트 리스너
+    ///
+    /// - Parameters:
+    /// - Returns:
+    ///
     @objc func singleViewHandlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
         guard let view = gesture.view else { return }
-        if self.isMultiCamSupported && self.position == .front { return }
+        if self.cameraSessionMode == .multiSession && self.position == .front { return }
         if gesture.state == .changed {
 
             let scale = Double(gesture.scale)
@@ -216,7 +254,7 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     ///
-    /// 카메라 init 함수
+    /// 싱글 세션 카메라 init 함수
     ///
     /// - Parameters:
     /// - Returns:
@@ -275,6 +313,12 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
        
     }
     
+    ///
+    /// 멀티 세션 카메라 init 함수
+    ///
+    /// - Parameters:
+    /// - Returns:
+    ///
     func setupMultiCaptureSessions() {
         self.backCamera = self.findDeviceForMultiSession(withPosition: .back)
         self.frontCamera = self.findDeviceForMultiSession(withPosition: .front)
@@ -691,7 +735,7 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         DispatchQueue.main.async {
             self.position = position
             
-            if self.isMultiCamSupported {
+            if self.isMultiCamSupported && self.cameraViewMode == .doubleScreen {
                 self.setMirrorMode(isMirrorMode: position == .front)
             } else {
                 if position == .back {
@@ -1116,7 +1160,6 @@ class CameraManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         
         self.previousImageBuffer = pixelBuffer
         self.previousTimeStamp = timestamp
-        
         switch sourceDevicePosition {
         case .front:
             if self.mainCameraPostion == .front {
