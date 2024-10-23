@@ -176,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				D133622A2CAE787D00CA7B00 /* Camera */,
-				D13362302CAE787D00CA7B00 /* UIKitViewRepresentable.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -243,6 +242,7 @@
 				D133622C2CAE787D00CA7B00 /* Vertex.swift */,
 				D133622D2CAE787D00CA7B00 /* CameraMetalView.swift */,
 				D1D2884C2CC35E1800B5ACE4 /* MultiCameraView.swift */,
+				D13362302CAE787D00CA7B00 /* UIKitViewRepresentable.swift */,
 			);
 			path = Metal;
 			sourceTree = "<group>";

@@ -83,10 +83,6 @@ class MultiCameraView: UIView, UIGestureRecognizerDelegate {
         smallCameraView?.addGestureRecognizer(tapGesture)
     }
     
-    func setAppendQueueCallback(appendQueueCallback: AppendQueueProtocol) {
-//        self.appendQueueCallback = appendQueueCallback
-    }
-    
     @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
         print("smallCameraView 탭됨")
         // 탭 제스처 처리 로직을 여기에 추가
