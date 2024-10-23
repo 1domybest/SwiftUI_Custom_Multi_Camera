@@ -250,6 +250,7 @@
 		D133623E2CAE789000CA7B00 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				D1AB883D2CC8D12D008DA1A7 /* Device */,
 				D16CA1B52CC36110002CF504 /* Media */,
 			);
 			path = Manager;
@@ -284,11 +285,18 @@
 			isa = PBXGroup;
 			children = (
 				D16CA1B42CC36107002CF504 /* Record */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		D1AB883D2CC8D12D008DA1A7 /* Device */ = {
+			isa = PBXGroup;
+			children = (
 				D16CA1B32CC360BD002CF504 /* Audio */,
 				D16CA1B22CC360A8002CF504 /* Camera */,
 				D1D2884A2CC2504700B5ACE4 /* DeviceMananger.swift */,
 			);
-			path = Media;
+			path = Device;
 			sourceTree = "<group>";
 		};
 		E143719DE0D2437C9D2969BA /* Frameworks */ = {
